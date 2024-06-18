@@ -34,7 +34,7 @@ const game = () => {
 };
 
 const finish = () => {
-  const allDone = document.querySelectorAll(".done");
+  // const allDone = document.querySelectorAll(".done");
   // const allSpan = document.querySelectorAll(".container div > *");
 
   again.addEventListener("click", () => {
@@ -119,3 +119,7 @@ const result = () => {
 };
 
 game();
+
+again.addEventListener("click", () => {
+  location.reload(); //Recharge la plage
+});
