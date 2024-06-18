@@ -1,27 +1,28 @@
 const carreaux = document.querySelectorAll(".container div");
 const conducteur = document.querySelector("h2");
 let turn = "player1";
+let fin = false;
 let counter = 0;
 
 const game = () => {
   conducteur.textContent = "Le joueur 1 commence !";
   carreaux.forEach((carreau) => {
     carreau.addEventListener("click", () => {
-      if (!carreau.classList.contains("done")) {
+      if (!carreau.classList.contains("done") && fin === false) {
         if (turn === "player1") {
           carreau.firstChild.textContent = "X";
           turn = "player2";
           conducteur.textContent = "Au tour du joueur 2 !";
           carreau.classList.add("done");
           counter++;
-          console.log(counter);
+          // console.log(counter);
         } else {
           carreau.firstChild.textContent = "0";
           turn = "player1";
           conducteur.textContent = "Au tour du joueur 1 !";
           carreau.classList.add("done");
           counter++;
-          console.log(counter);
+          // console.log(counter);
         }
       }
       result();
@@ -37,15 +38,17 @@ const finish = () => {
   // const allSpan = document.querySelectorAll(".container div > *");
 
   again.addEventListener("click", () => {
-    allDone.forEach((div) => {
-      div.innerHTML = `<span></span>`;
-      div.classList.remove("done");
-    });
+    // allDone.forEach((div) => {
+    //   div.innerHTML = `<span></span>`;
+    //   div.classList.remove("done");
+    // });
     reboot();
   });
 };
 
 const reboot = () => {
+  location.reload(); //Recharge la plage
+  fin = false;
   turn = "player1";
   counter = 0;
   game();
@@ -104,12 +107,13 @@ const result = () => {
       trois.textContent !== "")
   ) {
     if (turn === "player2") {
-      console.log("Le joueur 1 a gagné");
+      // console.log("Le joueur 1 a gagné");
       conducteur.textContent = "Le joueur 1 a gagné ! Partie terminée.";
     } else {
-      console.log("Le joueur 2 a gagné");
+      // console.log("Le joueur 2 a gagné");
       conducteur.textContent = "Le joueur 2 a gagné ! Partie terminée.";
     }
+    fin = true;
     finish();
   }
 };
